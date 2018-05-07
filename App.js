@@ -4,6 +4,7 @@ import ProductList from "./ProductList";
 import Header from "./Header";
 import { StackNavigator, createStackNavigator } from "react-navigation";
 import ProductDetail from "./ProductDetail";
+import ProductListWithFlatList from "./ProductListWithFlatList";
 
 class App extends React.Component {
   static navigationOptions = {
@@ -22,7 +23,8 @@ class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ProductList {...this.props} />
+        {/*<ProductList {...this.props} />*/}
+        <ProductListWithFlatList {...this.props}/>
       </View>
     );
   }
