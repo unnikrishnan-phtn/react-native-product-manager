@@ -13,50 +13,56 @@ import {
 
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 
-const ProductListItem = ({ id, image, title, navigation, price, rating }) => (
-  <TouchableOpacity
-    activeOpacity={0.5}
-    onPress={() => {
-      console.log('Navigating to detail for id ', id);
-      navigation.navigate("Detail", { id });
-    }}
-  >
-    <View style={styles.container}>
-      <Image
-        source={{ uri: image }}
-        style={styles.image}
-        resizeMode="contain"
-      />
-      <View style={{ flex: 1, justifyContent: "flex-start" }}>
-        <View style={styles.infoContainer}>
-          <Text style={[styles.title, { flexShrink: 1, overflow: "hidden" }]}>
-            {title}
-          </Text>
-
-          <Ionicons
-            name="md-heart-outline"
-            size={32}
-            color="#00ff80"
-            style={{ marginRight: 10 }}
-            hitSlop={{ top: 40, left: 40, right: 40, bottom: 40 }}
-            onPress={() => Alert.alert("aaa", "aaaa")}
+class ProductListItem extends React.PureComponent {
+  render() {
+    let { id, image, title, navigation, price, rating } = this.props;
+    return (
+      <TouchableOpacity
+        activeOpacity={0.5}
+        onPress={() => {
+          console.log("Navigating to detail for id ", id);
+          navigation.navigate("Detail", { id });
+        }}
+      >
+        <View style={styles.container}>
+          <Image
+            source={{ uri: image }}
+            style={styles.image}
+            resizeMode="contain"
           />
-        </View>
-        <View style={styles.rating}>
-          <Text style={{ color: "#fff", marginRight: 4 }}>{rating}</Text>
-          <Ionicons name="md-star" size={12} color="#fff" />
-        </View>
-        <View style={styles.price}>
-          <FontAwesome name="rupee" size={16} color="#000" />
-          <Text style={{ fontSize: 16, fontWeight: "bold", marginLeft: 5 }}>
-            {price}
-          </Text>
-        </View>
-      </View>
-    </View>
-  </TouchableOpacity>
-);
+          <View style={{ flex: 1, justifyContent: "flex-start" }}>
+            <View style={styles.infoContainer}>
+              <Text
+                style={[styles.title, { flexShrink: 1, overflow: "hidden" }]}
+              >
+                {title}
+              </Text>
 
+              <Ionicons
+                name="md-heart-outline"
+                size={32}
+                color="#00ff80"
+                style={{ marginRight: 10 }}
+                hitSlop={{ top: 40, left: 40, right: 40, bottom: 40 }}
+                onPress={() => Alert.alert("aaa", "aaaa")}
+              />
+            </View>
+            <View style={styles.rating}>
+              <Text style={{ color: "#fff", marginRight: 4 }}>{rating}</Text>
+              <Ionicons name="md-star" size={12} color="#fff" />
+            </View>
+            <View style={styles.price}>
+              <FontAwesome name="rupee" size={16} color="#000" />
+              <Text style={{ fontSize: 16, fontWeight: "bold", marginLeft: 5 }}>
+                {price}
+              </Text>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,

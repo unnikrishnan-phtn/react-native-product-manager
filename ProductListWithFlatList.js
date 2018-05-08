@@ -12,8 +12,12 @@ let URI = "http://192.168.1.101:4000";
 class ProductListWithFlatList extends Component {
   constructor(props) {
     super(props);
-    this.state = { products: [], isLoading: false, isRefreshing: false };
-    this.page = 1;
+    this.state = {
+      products: [],
+      isLoading: false,
+      isRefreshing: false,
+      page: 1
+    };
   }
 
   componentDidMount() {
@@ -22,15 +26,11 @@ class ProductListWithFlatList extends Component {
   }
 
   _getProducts = (page = 1, limit = 8) => {
-    fetch(`${URI}/products?_page${page}&_limit=${limit}`)
+    fetch(`${URI}/products?_page=${page}&_limit=${limit}`)
       .then(r => r.json())
       .then(products => {
-        
-        let newProducts = [].concat(this.state.products);
-        newProducts = [...products, ...newProducts];
-       
         this.setState({
-          products: newProducts,
+          products: this.state.products.concat(products),
           isLoading: false,
           isRefreshing: false
         });
@@ -40,24 +40,27 @@ class ProductListWithFlatList extends Component {
   /*  flat list supporting methods */
 
   _getMore = () => {
-    this._getProducts(++this.page);
+    this.setState({ page: ++this.state.page }, function() {
+      this._getProducts(this.state.page);
+    });
   };
 
   _renderItem = ({ index, item }) => {
     return (
       <ProductListItem
         {...this.props}
-        key={item.id}
         id={item.id}
-        title={`${index + 1} - ${item.title}`}
+        title={`${item.id} - ${item.title}`}
         image={`${URI}/images/${item.image}`}
         rating={item.rating}
         price={item.price}
       />
     );
-  }
+  };
 
-  _keyExtractor = (item, index) => `${item.id}`;
+  _keyExtractor = (item, index) => {
+    return `${index}`;
+  };
 
   _onRefresh = () => {
     this.setState({ isRefreshing: true });
@@ -83,7 +86,6 @@ class ProductListWithFlatList extends Component {
       <ActivityIndicator size="large" color="#00ff80" />
     ) : (
       <FlatList
-        
         data={this.state.products}
         renderItem={this._renderItem}
         keyExtractor={this._keyExtractor}
@@ -92,6 +94,10 @@ class ProductListWithFlatList extends Component {
         refreshControl={this._renderRefreshControl()}
       />
     );
+  }
+
+  componentWillUnmount() {
+    console.log("Unmounting");
   }
 }
 

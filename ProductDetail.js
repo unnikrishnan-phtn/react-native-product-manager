@@ -17,12 +17,11 @@ class ProductDetail extends React.Component {
   componentDidMount() {
     this.setState({ isLoading: true });
     let { id } = this.props.navigation.state.params;
+    console.log(id);
     fetch(`${URI}/products/${id}`)
       .then(r => r.json())
       .then(product =>
-        this.setState({ product, isLoading: false }, function() {
-          console.log(this.state);
-        })
+        this.setState({ product, isLoading: false })
       );
   }
 
@@ -36,7 +35,7 @@ class ProductDetail extends React.Component {
           style={{ height: 200, marginTop: 20 }}
           resizeMode="contain"
         />
-        <Text style={styles.title}>{product.title}</Text>
+        <Text style={styles.title}>{product.id} - {product.title}</Text>
         <Text style={[styles.title, { fontSize: 16 }]}>
           {product.additionalInfo && `(${product.additionalInfo})`}
         </Text>
