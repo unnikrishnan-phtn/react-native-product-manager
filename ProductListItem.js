@@ -16,7 +16,10 @@ import { Ionicons, FontAwesome } from "@expo/vector-icons";
 const ProductListItem = ({ id, image, title, navigation, price, rating }) => (
   <TouchableOpacity
     activeOpacity={0.5}
-    onPress={() => navigation.navigate("Detail", { id })}
+    onPress={() => {
+      console.log('Navigating to detail for id ', id);
+      navigation.navigate("Detail", { id });
+    }}
   >
     <View style={styles.container}>
       <Image
