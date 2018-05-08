@@ -4,7 +4,8 @@ import {
   ActivityIndicator,
   ScrollView,
   FlatList,
-  RefreshControl
+  RefreshControl,
+  Alert
 } from "react-native";
 
 let URI = "http://192.168.1.101:4000";
@@ -24,6 +25,16 @@ class ProductListWithFlatList extends Component {
     this.setState({ isLoading: true });
     this._getProducts();
   }
+
+  onWishTapped = id => {
+    //Alert.alert(`Product tapped :${id}`);
+    let updateIndex = this.state.products.findIndex(p => p.id === id);
+    this.state.products[updateIndex].wish = !this.state.products[updateIndex]
+      .wish;
+    this.setState({ products: [...this.state.products] }, function() {
+      console.log(this.state);
+    });
+  };
 
   _getProducts = (page = 1, limit = 8) => {
     fetch(`${URI}/products?_page=${page}&_limit=${limit}`)
@@ -54,6 +65,8 @@ class ProductListWithFlatList extends Component {
         image={`${URI}/images/${item.image}`}
         rating={item.rating}
         price={item.price}
+        wish={item.wish || false}
+        onWishTapped={this.onWishTapped}
       />
     );
   };

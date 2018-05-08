@@ -15,7 +15,16 @@ import { Ionicons, FontAwesome } from "@expo/vector-icons";
 
 class ProductListItem extends React.PureComponent {
   render() {
-    let { id, image, title, navigation, price, rating } = this.props;
+    let {
+      id,
+      image,
+      title,
+      navigation,
+      price,
+      rating,
+      wish = true,
+      onWishTapped
+    } = this.props;
     return (
       <TouchableOpacity
         activeOpacity={0.5}
@@ -39,12 +48,12 @@ class ProductListItem extends React.PureComponent {
               </Text>
 
               <Ionicons
-                name="md-heart-outline"
+                name={wish ? "md-heart" : "md-heart-outline"}
                 size={32}
                 color="#00ff80"
                 style={{ marginRight: 10 }}
                 hitSlop={{ top: 40, left: 40, right: 40, bottom: 40 }}
-                onPress={() => Alert.alert("aaa", "aaaa")}
+                onPress={() => onWishTapped(id)}
               />
             </View>
             <View style={styles.rating}>
