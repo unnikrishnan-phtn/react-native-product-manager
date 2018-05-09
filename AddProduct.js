@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Button, TextInput, Picker,Alert } from 'react-native';
+import { View, StyleSheet, Button, TextInput, Picker,Alert,Text } from 'react-native';
 
 let URI = "http://192.168.1.101:4000";
 
 export default class AddProduct extends Component {
-
+  static navigationOptions= {
+    title: "Add",
+    headerStyle: {
+      backgroundColor: "#00ff80"
+    },
+    headerTintColor: "#fff",
+    headerTitleStyle: {
+      fontWeight: "bold",
+      textAlign: "center"
+    },
+  }
   constructor(props) {
     super(props);
     this.state = {
       title: '',
+      titleError:null,
       category: 'Mobiles',
       additionalInfo: '',
       categories: ['Mobiles', 'Laptops', 'Desktops', 'Others'],
@@ -23,6 +34,10 @@ export default class AddProduct extends Component {
       additionalInfo,
       price
     } = this.state;
+    if(!title){
+      this.setState({titleError:'Title is required'})
+      return;
+    }
     fetch(`${URI}/products`, {
       body: JSON.stringify({
         title,
@@ -34,22 +49,28 @@ export default class AddProduct extends Component {
       headers: {
         'content-type': 'application/json'
       },
-    }).then(p => Alert.alert('Success','Product Saved Successfully'))
+    }).then(p => {Alert.alert('Success','Product Saved Successfully')})
   }
 
   renderCategories = () => {
-    return this.state.categories.map(c => <Picker.Item label={c} value={c} />)
+    return this.state.categories.map(c => <Picker.Item key={c} label={c} value={c} />)
   }
   render() {
     return (
       <View style={styles.container}>
         <TextInput
           style={{ height: 40 }}
-          onChangeText={(title) => this.setState({ title })}
+          onChangeText={(title) => {
+            this.setState({ title,titleError:null })
+            if(title.length==0){
+              this.setState({ titleError:'Title is required' })
+            }
+          }}
           value={this.state.title}
           placeholder="Product Name"
           placeholderTextColor="grey"
         />
+        {this.state.titleError && <Text style={{color:'red'}}>Title is required</Text>}
         <TextInput
           style={{ height: 80 }}
           onChangeText={(additionalInfo) => this.setState({ additionalInfo })}

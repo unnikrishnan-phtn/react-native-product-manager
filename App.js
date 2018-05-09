@@ -77,12 +77,9 @@ const ListStack =  createStackNavigator({
 
 });
 
-const ManageStack = createStackNavigator({
+const AddStack = createStackNavigator({
   Add: {
     screen: AddProduct
-  },
-  Detail: {
-    screen: ProductDetail
   }
 }, {
   initialRouteName: "Add",
@@ -103,7 +100,7 @@ const ManageStack = createStackNavigator({
 export default createBottomTabNavigator(
   {
     List: ListStack,
-    Manage: ManageStack,
+    Add: AddStack,
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -112,8 +109,8 @@ export default createBottomTabNavigator(
         let iconName;
         if (routeName === 'List') {
           iconName = `ios-list-box${focused ? '' : '-outline'}`;
-        } else if (routeName === 'Manage') {
-          iconName = `ios-options${focused ? '' : '-outline'}`;
+        } else if (routeName === 'Add') {
+          iconName = `ios-add-circle${focused ? '' : '-outline'}`;
         }
 
         // You can return any component that you like here! We usually use an
