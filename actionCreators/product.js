@@ -22,9 +22,11 @@ import {
 // export const GET_PRODUCT_SUCCESS = 'GET_PRODUCT_SUCCESS'
 // export const GET_PRODUCT_FAILURE = 'GET_PRODUCT_FAILURE'
 
-export function getProducts() {
+export function getProducts(page, limit) {
     return {
-        type: GET_PRODUCTS
+        type: GET_PRODUCTS,
+        page,
+        limit
     }
 }
 

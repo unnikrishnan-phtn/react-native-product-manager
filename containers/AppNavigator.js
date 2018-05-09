@@ -5,11 +5,12 @@ import {
 } from "react-navigation-redux-helpers";
 import { connect } from "react-redux";
 import React from "react";
-import ProductListWithFlatList from "../ProductListWithFlatList";
+
 import ProductDetail from "../ProductDetail";
 import AddProduct from "../AddProduct";
 import StoreMap from "../StoreMap";
 import {Ionicons,MaterialIcons} from "@expo/vector-icons"
+import ProductListWithFlatList from "./ProductListWithFlatList";
 
 const ListStack = createStackNavigator(
   {

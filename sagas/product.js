@@ -11,41 +11,37 @@ let URI = "http://192.168.1.101:4000";
 
 function* getProducts(action) {
     try {
-        let products = yield fetch(`${URI}\products`).then(r => r.json());
+        let products = yield fetch(`${URI}/products?_page=${action.page}&_limit=${action.limit}`).then(r => r.json());
         yield put(actionCreators.getProductsSuccess(products))
     } catch (error) {
         yield put(actionCreators.getProductsFailure(error))
     }
 }
 
-function* getProduct(action) {
-    try {
-        let product = yield fetch(`${URI}\product\${action.id}`).then(r => r.json());
-        yield put(actionCreators.getProductSuccess(product))
-    } catch (error) {
-        yield put(actionCreators.getProductFailure(error))
-    }
-}
+// function* getProduct(action) {
+//     try {
+//         let product = yield fetch(`${URI}\product\${action.id}`).then(r => r.json());
+//         yield put(actionCreators.getProductSuccess(product))
+//     } catch (error) {
+//         yield put(actionCreators.getProductFailure(error))
+//     }
+// }
 
-function* addProduct(action) {
-    try {
-        let product = yield fetch(`${URI}\products`, {
-            body: JSON.stringify(action.product),
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-        }).then(r => r.json());
-        yield put(actionCreators.addProductSuccess(product))
-    } catch (error) {
-        yield put(actionCreators.addProductFailure(error))
-    }
-}
+// function* addProduct(action) {
+//     try {
+//         let product = yield fetch(`${URI}\products`, {
+//             body: JSON.stringify(action.product),
+//             method: 'POST',
+//             headers: {
+//                 'content-type': 'application/json'
+//             },
+//         }).then(r => r.json());
+//         yield put(actionCreators.addProductSuccess(product))
+//     } catch (error) {
+//         yield put(actionCreators.addProductFailure(error))
+//     }
+// }
 
-export default function* productWatchers() {
-    yield [
-        takeLatest(GET_PRODUCTS, getProducts),
-        takeLatest(GET_PRODUCT, getProduct),
-        takeLatest(ADD_PRODUCT,addProduct)
-    ]
+export function* productWatchers() {
+    yield takeLatest(GET_PRODUCTS, getProducts)
 }

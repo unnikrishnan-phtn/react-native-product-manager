@@ -36,7 +36,7 @@ class ProductListItem extends React.PureComponent {
       >
         <View style={styles.container}>
           <Image
-            source={image ? { uri: image } : require("./assets/barcode.png")}
+            source={image ? { uri: image } : require("../assets/barcode.png")}
             style={styles.image}
             resizeMode="contain"
           />
