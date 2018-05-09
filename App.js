@@ -18,14 +18,15 @@ import {
 import ProductDetail from "./ProductDetail";
 import ProductListWithFlatList from "./ProductListWithFlatList";
 import {
-  Ionicons
+  Ionicons,MaterialIcons
 } from "@expo/vector-icons";
 import AddProduct from "./AddProduct";
+import StoreMap from "./StoreMap";
 
 class App extends React.Component {
   static navigationOptions = {
     //title: "Home",
-    headerTitle: <Header title = "Product Manager"/> ,
+    //headerTitle: <Header title = "Product Manager"/> ,
   };
   constructor(props){
     super(props);
@@ -101,6 +102,7 @@ export default createBottomTabNavigator(
   {
     List: ListStack,
     Add: AddStack,
+    Stores:StoreMap
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -111,6 +113,8 @@ export default createBottomTabNavigator(
           iconName = `ios-list-box${focused ? '' : '-outline'}`;
         } else if (routeName === 'Add') {
           iconName = `ios-add-circle${focused ? '' : '-outline'}`;
+        } else if(routeName==='Stores'){
+          return <MaterialIcons name="local-grocery-store" size={25} color={tintColor}/>
         }
 
         // You can return any component that you like here! We usually use an
