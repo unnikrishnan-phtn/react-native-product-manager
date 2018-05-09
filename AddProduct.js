@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Button, TextInput, Picker,Alert,Text } from 'react-native';
+import { View, StyleSheet, Button, TextInput, Picker,Alert,Text,Platform } from 'react-native';
 
 let URI = "http://192.168.1.101:4000";
 
@@ -59,7 +59,7 @@ export default class AddProduct extends Component {
     return (
       <View style={styles.container}>
         <TextInput
-          style={{ height: 40 }}
+          style={styles.control}
           onChangeText={(title) => {
             this.setState({ title,titleError:null })
             if(title.length==0){
@@ -72,15 +72,16 @@ export default class AddProduct extends Component {
         />
         {this.state.titleError && <Text style={{color:'red'}}>Title is required</Text>}
         <TextInput
-          style={{ height: 80 }}
+          numberOfLines={5}
           onChangeText={(additionalInfo) => this.setState({ additionalInfo })}
           multiline={true}
           value={this.state.additionalInfo}
           placeholder="Additional Info"
           placeholderTextColor="grey"
+          style={styles.additionalInfo}
         />
         <TextInput
-          style={{ height: 40 }}
+          style={styles.control}
           onChangeText={(price) => this.setState({ price })}
           value={this.state.price}
           placeholder="Product Price"
@@ -89,7 +90,6 @@ export default class AddProduct extends Component {
         />
         <Picker
           selectedValue={this.state.language}
-          style={{ height: 50 }}
           onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}>
           {this.renderCategories()}
         </Picker>
@@ -109,4 +109,24 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     backgroundColor: '#ffffff',
   },
+  control:{
+    ...Platform.select({
+      android:{
+        height:40
+      },
+      ios:{
+        borderBottomWidth:StyleSheet.hairlineWidth,
+        borderBottomColor:'grey',
+        marginTop:20,
+        marginBottom:20
+      }
+    })
+  },
+  additionalInfo:{
+    ...Platform.select({
+      ios:{
+        height:80
+      }
+    })
+  }
 });
