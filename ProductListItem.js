@@ -14,6 +14,7 @@ import {
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 
 class ProductListItem extends React.PureComponent {
+  
   render() {
     let {
       id,
@@ -35,7 +36,7 @@ class ProductListItem extends React.PureComponent {
       >
         <View style={styles.container}>
           <Image
-            source={{ uri: image }}
+            source={image ? { uri: image } : require("./assets/barcode.png")}
             style={styles.image}
             resizeMode="contain"
           />
@@ -57,7 +58,7 @@ class ProductListItem extends React.PureComponent {
               />
             </View>
             <View style={styles.rating}>
-              <Text style={{ color: "#fff", marginRight: 4 }}>{rating}</Text>
+              <Text style={{ color: "#fff", marginRight: 4 }}>{rating || "NA"}</Text>
               <Ionicons name="md-star" size={12} color="#fff" />
             </View>
             <View style={styles.price}>
@@ -94,7 +95,8 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     flexDirection: "row",
-    paddingTop: 20
+    paddingTop: 20,
+    justifyContent:'space-between'
   },
   rating: {
     borderRadius: 5,

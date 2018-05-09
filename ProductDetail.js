@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet,ScrollView,ActivityIndicator } from "react-native";
 
 let URI = "http://192.168.1.101:4000";
 
@@ -25,13 +25,12 @@ class ProductDetail extends React.Component {
       );
   }
 
-  render() {
+  renderProduct(){
     const { navigation } = this.props;
     const { product } = this.state;
-    return (
-      <View style={styles.container}>
+    return (<View>
         <Image
-          source={{ uri: `${URI}/images/${product.image}` }}
+          source={product.image ? { uri: `${URI}/images/${product.image}` } : require("./assets/barcode.png")}
           style={{ height: 200, marginTop: 20 }}
           resizeMode="contain"
         />
@@ -39,6 +38,18 @@ class ProductDetail extends React.Component {
         <Text style={[styles.title, { fontSize: 16 }]}>
           {product.additionalInfo && `(${product.additionalInfo})`}
         </Text>
+      </View>)
+  }
+
+  render() {
+   
+    return (
+      <View style={styles.container}>
+        {this.state.isLoading ? (
+          <ActivityIndicator size="large" color="#00ff80" />
+        ) : (
+          this.renderProduct()
+        )}
       </View>
     );
   }

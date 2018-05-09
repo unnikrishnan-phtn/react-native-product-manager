@@ -15,10 +15,10 @@ const styles = StyleSheet.create({
     alignItems:'center',
     ...Platform.select({
       android: {
-        height: 66
+        height: 44
       },
       ios: {
-        height: 66
+        height: 44
       }
     })
   },

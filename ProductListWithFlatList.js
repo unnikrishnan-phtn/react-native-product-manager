@@ -62,7 +62,7 @@ class ProductListWithFlatList extends Component {
         {...this.props}
         id={item.id}
         title={`${item.id} - ${item.title}`}
-        image={`${URI}/images/${item.image}`}
+        image={item.image ? `${URI}/images/${item.image}`:null}
         rating={item.rating}
         price={item.price}
         wish={item.wish || false}
