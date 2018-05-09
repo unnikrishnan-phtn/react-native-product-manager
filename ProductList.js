@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import ProductListItem from "./ProductListItem";
 import { ActivityIndicator, ScrollView } from "react-native";
-
-let URI = "http://192.168.1.101:4000";
+import 
 
 class ProductList extends Component {
   constructor(props) {
