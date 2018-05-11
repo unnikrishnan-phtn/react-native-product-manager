@@ -1,4 +1,4 @@
-import { createStackNavigator,createBottomTabNavigator } from "react-navigation";
+import { createStackNavigator, createBottomTabNavigator } from "react-navigation";
 import {
   createReduxBoundAddListener,
   createReactNavigationReduxMiddleware
@@ -6,10 +6,10 @@ import {
 import { connect } from "react-redux";
 import React from "react";
 
-import ProductDetail from "../ProductDetail";
-import AddProduct from "../AddProduct";
-import StoreMap from "../StoreMap";
-import {Ionicons,MaterialIcons} from "@expo/vector-icons"
+import ProductDetail from "./ProductDetail";
+import AddProduct from "./AddProduct";
+import StoreMap from "./StoreMap";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons"
 import ProductListWithFlatList from "./ProductListWithFlatList";
 
 const ListStack = createStackNavigator(

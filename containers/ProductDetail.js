@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, StyleSheet,ScrollView,ActivityIndicator } from "react-native";
+import { View, Text, Image, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
 
 let URI = "http://192.168.1.101:4000";
 
@@ -25,31 +25,31 @@ class ProductDetail extends React.Component {
       );
   }
 
-  renderProduct(){
+  renderProduct() {
     const { navigation } = this.props;
     const { product } = this.state;
     return (<View>
-        <Image
-          source={product.image ? { uri: `${URI}/images/${product.image}` } : require("./assets/barcode.png")}
-          style={{ height: 200, marginTop: 20 }}
-          resizeMode="contain"
-        />
-        <Text style={styles.title}>{product.id} - {product.title}</Text>
-        <Text style={[styles.title, { fontSize: 16 }]}>
-          {product.additionalInfo && `(${product.additionalInfo})`}
-        </Text>
-      </View>)
+      <Image
+        source={product.image ? { uri: `${URI}/images/${product.image}` } : require("../assets/barcode.png")}
+        style={{ height: 200, marginTop: 20 }}
+        resizeMode="contain"
+      />
+      <Text style={styles.title}>{product.id} - {product.title}</Text>
+      <Text style={[styles.title, { fontSize: 16 }]}>
+        {product.additionalInfo && `(${product.additionalInfo})`}
+      </Text>
+    </View>)
   }
 
   render() {
-   
+
     return (
       <View style={styles.container}>
         {this.state.isLoading ? (
           <ActivityIndicator size="large" color="#00ff80" />
         ) : (
-          this.renderProduct()
-        )}
+            this.renderProduct()
+          )}
       </View>
     );
   }
