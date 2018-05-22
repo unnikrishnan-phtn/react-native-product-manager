@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Button, TextInput, Picker,Alert,Text,Platform } from 'react-native';
 
-let URI = "http://192.168.1.101:4000";
+let URI = "http://192.168.1.33:4000";
 
 export default class AddProduct extends Component {
   static navigationOptions= {

@@ -17,7 +17,8 @@ const store = createStore(
     isLoading: false,
     isRefreshing: false,
     page: 1,
-    limit:8
+    limit:8,
+    filteredProducts:[]
  },
     storeState: { stores: [], isLoading: false }
   },

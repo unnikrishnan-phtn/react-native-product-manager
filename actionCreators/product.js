@@ -7,7 +7,9 @@ import {
     GET_PRODUCT_SUCCESS,
     ADD_PRODUCT,
     ADD_PRODUCT_SUCCESS,
-    ADD_PRODUCT_FAILURE
+    ADD_PRODUCT_FAILURE,
+    DELETE_PRODUCT,
+    SEARCH_PRODUCT
 } from "../actionTypes/product";
 
 // export const GET_PRODUCTS = 'GET_PRODUCTS'
@@ -72,6 +74,20 @@ export function addProduct(product) {
     }
 }
 
+export function deleteProduct(id) {
+    return {
+        type: DELETE_PRODUCT,
+        id
+    }
+}
+
+export function searchProductList(products,itemName) {
+    return {
+        type: SEARCH_PRODUCT,
+        products,
+        itemName
+    }
+} 
 export function addProductSuccess(product) {
     return {
         type: ADD_PRODUCT_SUCCESS,

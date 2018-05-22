@@ -24,7 +24,9 @@ class ProductListItem extends React.PureComponent {
       price,
       rating,
       wish = true,
-      onWishTapped
+      onWishTapped,
+      doDelete = false,
+      showWish = true
     } = this.props;
     return (
       <TouchableOpacity
@@ -47,15 +49,15 @@ class ProductListItem extends React.PureComponent {
               >
                 {title}
               </Text>
-
+              {(showWish)?
               <Ionicons
-                name={wish ? "md-heart" : "md-heart-outline"}
+                name={doDelete ? wish ?"ios-remove-circle": "ios-remove-circle-outline": wish ? "md-heart" : "md-heart-outline"}
                 size={32}
-                color="#00ff80"
+                color={doDelete ?"#FF2400":"#00ff80"}
                 style={{ marginRight: 10 }}
                 hitSlop={{ top: 40, left: 40, right: 40, bottom: 40 }}
                 onPress={() => onWishTapped(id)}
-              />
+              />:<View />}
             </View>
             <View style={styles.rating}>
               <Text style={{ color: "#fff", marginRight: 4 }}>{rating || "NA"}</Text>

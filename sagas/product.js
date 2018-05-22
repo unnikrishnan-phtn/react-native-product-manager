@@ -7,7 +7,7 @@ import {
     GET_PRODUCTS, ADD_PRODUCT
 } from "../actionTypes/product";
 
-let URI = "http://192.168.1.101:4000";
+let URI = "http://192.168.1.33:4000";
 
 function* getProducts(action) {
     try {

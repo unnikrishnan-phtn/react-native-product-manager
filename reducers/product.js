@@ -7,7 +7,9 @@ import {
     GET_PRODUCT_FAILURE,
     ADD_PRODUCT,
     ADD_PRODUCT_SUCCESS,
-    ADD_PRODUCT_FAILURE
+    ADD_PRODUCT_FAILURE,
+    DELETE_PRODUCT,
+    SEARCH_PRODUCT
 } from "../actionTypes/product";
 
 export default (prevState = {
@@ -16,7 +18,9 @@ export default (prevState = {
     isLoading: false,
     isRefreshing: false,
     page: 1,
-    limit: 8
+    limit: 8,
+    id:-1,
+    itemName:''
 }, action) => {
     console.log(action.type);
     switch (action.type) {
@@ -49,6 +53,17 @@ export default (prevState = {
                 isLoading: false,
                 product: action.product
             }
+        case DELETE_PRODUCT:
+        return { ...prevState,
+            isLoading: false,
+            products: prevState.products.filter(tmpProduct => tmpProduct.id !== action.id)
+        }
+        case SEARCH_PRODUCT:
+        return { ...prevState,
+            isLoading: false,
+            filteredProducts: action.itemName.length>0?action.products.filter(tmpProduct => 
+                tmpProduct.title.includes(action.itemName)) :[]
+        }
         case GET_PRODUCTS_FAILURE:
         case GET_PRODUCT_FAILURE:
         case ADD_PRODUCT_FAILURE:

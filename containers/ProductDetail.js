@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
 
-let URI = "http://192.168.1.101:4000";
+let URI = "http://192.168.1.33:4000";
 
 class ProductDetail extends React.Component {
   //static navigationOptions = { title: "Product Detail" };

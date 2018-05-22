@@ -11,6 +11,9 @@ import AddProduct from "./AddProduct";
 import StoreMap from "./StoreMap";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons"
 import ProductListWithFlatList from "./ProductListWithFlatList";
+import ProductAdmin from "./ProductAdmin";
+import SearchProduct from "./SearchProduct";
+
 
 const ListStack = createStackNavigator(
   {
@@ -37,6 +40,33 @@ const ListStack = createStackNavigator(
   }
 );
 
+
+const AdminStack = createStackNavigator(
+  {
+    Admin: {
+      screen: ProductAdmin
+    },
+    Detail: {
+      screen: ProductDetail
+    }
+  },
+  {
+    initialRouteName: "Admin",
+    navigationOptions: {
+      title: "Admin",
+      headerStyle: {
+        backgroundColor: "#00ff80"
+      },
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        fontWeight: "bold",
+        textAlign: "center"
+      }
+    }
+  }
+);
+
+
 const AddStack = createStackNavigator(
   {
     Add: {
@@ -59,9 +89,34 @@ const AddStack = createStackNavigator(
   }
 );
 
+
+const SearchStack = createStackNavigator(
+  {
+    Search: {
+      screen: SearchProduct
+    }
+  },
+  {
+    initialRouteName: "Search",
+    navigationOptions: {
+      title: "Search",
+      headerStyle: {
+        backgroundColor: "#00ff80"
+      },
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        fontWeight: "bold",
+        textAlign: "center"
+      }
+    }
+  }
+);
+
 export const AppNavigator = createBottomTabNavigator(
   {
     List: ListStack,
+    Search:SearchStack,
+    Admin:AdminStack,
     Add: AddStack,
     Stores: StoreMap
   },
@@ -74,6 +129,10 @@ export const AppNavigator = createBottomTabNavigator(
           iconName = `ios-list-box${focused ? "" : "-outline"}`;
         } else if (routeName === "Add") {
           iconName = `ios-add-circle${focused ? "" : "-outline"}`;
+        } else if (routeName === "Admin") {
+          iconName = `ios-cog${focused ? "" : "-outline"}`;
+        } else if (routeName === "Search") {
+          iconName = `ios-search${focused ? "" : "-outline"}`;
         } else if (routeName === "Stores") {
           return (
             <MaterialIcons
