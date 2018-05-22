@@ -13,7 +13,7 @@ import { bindActionCreators } from "redux";
 import * as productActionCreators from "../actionCreators/product";
 import { Vibration } from "react-native";
 
-let URI = "http://192.168.1.33:4000";
+let URI = "http://172.16.102.72:4000";
 class ProductAdmin extends Component {
   constructor(props) {
     super(props);

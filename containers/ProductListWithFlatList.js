@@ -11,7 +11,7 @@ import {
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as productActionCreators from "../actionCreators/product";
-let URI = "http://192.168.1.33:4000";
+let URI = "http://172.16.102.72:4000";
 class ProductListWithFlatList extends Component {
   constructor(props) {
     super(props);
@@ -79,24 +79,24 @@ class ProductListWithFlatList extends Component {
   /*  flat list supporting methods - END */
 
   render() {
-    return (
-      <View style={{flex:1,backgroundColor:'#fff'}}>
-        {this.props.isLoading ? (
-          <ActivityIndicator size="large" color="#00ff80" />
-        ) : (
-          <FlatList
-            data={this.props.products}
-            renderItem={this._renderItem}
-            keyExtractor={this._keyExtractor}
-            onEndReachedThreshold={0.5}
-            onEndReached={this._getMore}
-            refreshControl={this._renderRefreshControl()}
-          />
-        )}
-      </View>
-    );
+      return (
+        <View style={{flex:1,backgroundColor:'#fff'}}>
+          {this.props.isLoading ? (
+            <ActivityIndicator size="large" color="#00ff80" />
+          ) : (
+            <FlatList
+              data={this.props.products}
+              renderItem={this._renderItem}
+              keyExtractor={this._keyExtractor}
+              onEndReachedThreshold={0.5}
+              onEndReached={this._getMore}
+              refreshControl={this._renderRefreshControl()}
+            />
+          )}
+        </View>
+      );
+    }
   }
-}
 
 function mapStateToProps(state) {
   return {

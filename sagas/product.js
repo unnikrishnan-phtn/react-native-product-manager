@@ -4,10 +4,10 @@ import {
 } from "redux-saga/effects";
 import * as actionCreators from "../actionCreators/product"
 import {
-    GET_PRODUCTS, ADD_PRODUCT
+    GET_PRODUCTS, ADD_PRODUCT, GET_PRODUCT
 } from "../actionTypes/product";
 
-let URI = "http://192.168.1.33:4000";
+let URI = "http://172.16.102.72:4000";
 
 function* getProducts(action) {
     try {
@@ -18,14 +18,17 @@ function* getProducts(action) {
     }
 }
 
-// function* getProduct(action) {
-//     try {
-//         let product = yield fetch(`${URI}\product\${action.id}`).then(r => r.json());
-//         yield put(actionCreators.getProductSuccess(product))
-//     } catch (error) {
-//         yield put(actionCreators.getProductFailure(error))
-//     }
-// }
+function* getProduct(action) {
+    try {
+        console.log(`${URI}/products/${action.id}`);
+        let product = yield fetch(`${URI}/products/${action.id}`).then(r => r.json());
+    
+        yield put(actionCreators.getProductSuccess(product))
+    } catch (error) {
+        console.log(error)
+        yield put(actionCreators.getProductFailure(error))
+    }
+}
 
 // function* addProduct(action) {
 //     try {
@@ -44,4 +47,5 @@ function* getProducts(action) {
 
 export function* productWatchers() {
     yield takeLatest(GET_PRODUCTS, getProducts)
+    yield takeLatest(GET_PRODUCT, getProduct)
 }

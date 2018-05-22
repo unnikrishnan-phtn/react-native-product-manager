@@ -1,7 +1,11 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, ScrollView, ActivityIndicator } from "react-native";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as productActionCreators from "../actionCreators/product";
 
-let URI = "http://192.168.1.33:4000";
+let URI = "http://172.16.102.72:4000";
+
 
 class ProductDetail extends React.Component {
   //static navigationOptions = { title: "Product Detail" };
@@ -11,23 +15,17 @@ class ProductDetail extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { product: {}, isLoading: false };
   }
 
   componentDidMount() {
     this.setState({ isLoading: true });
     let { id } = this.props.navigation.state.params;
-    console.log(id);
-    fetch(`${URI}/products/${id}`)
-      .then(r => r.json())
-      .then(product =>
-        this.setState({ product, isLoading: false })
-      );
+      this.props.actions.getProduct(id);
   }
 
   renderProduct() {
     const { navigation } = this.props;
-    const { product } = this.state;
+    const { product } = this.props;
     return (<View>
       <Image
         source={product.image ? { uri: `${URI}/images/${product.image}` } : require("../assets/barcode.png")}
@@ -45,7 +43,7 @@ class ProductDetail extends React.Component {
 
     return (
       <View style={styles.container}>
-        {this.state.isLoading ? (
+        {this.props.isLoading ? (
           <ActivityIndicator size="large" color="#00ff80" />
         ) : (
             this.renderProduct()
@@ -68,4 +66,21 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ProductDetail;
+
+function mapStateToProps(state) {
+  return {
+    product: state.productState.product,
+    isLoading: state.productState.isLoading
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(productActionCreators, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ProductDetail
+);
+
