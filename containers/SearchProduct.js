@@ -80,33 +80,35 @@ class SearchProduct extends Component {
 
   render() {
     return (
-      <View style={{flex:1,backgroundColor:'#fff'}}>
-      <SearchBar
-        lightTheme
-        onChangeText={this._onSearch.bind(this)}
-        onClearText={this._onSearch.bind(this)}
-        placeholder='Search Products' />
+      <View style={{ flex: 1, backgroundColor: '#fff' }}>
+        <SearchBar
+          lightTheme
+          onChangeText={this._onSearch.bind(this)}
+          onClearText={this._onSearch.bind(this)}
+          placeholder='Search Products' />
 
         {
-            this.props.isLoading ? (
-          <ActivityIndicator size="large" color="#00ff80" />
-        ) : (
-            this.props.filteredProducts.length>0?
-          <FlatList
-            data={this.props.filteredProducts}
-            renderItem={this._renderItem}
-            keyExtractor={this._keyExtractor}
-            onEndReachedThreshold={0.5}
-            onEndReached={this._getMore}
-            refreshControl={this._renderRefreshControl()}
-          /> 
-          :
-          <View style={{flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center'}}>
-            <Text style={{justifyContent: 'center',alignItems: 'center' }}>No Products found</Text>
-          </View>
-        )}
+          this.props.isLoading ? (
+            <ActivityIndicator size="large" color="#00ff80" />
+          ) : (
+              this.props.filteredProducts.length > 0 ?
+                <FlatList
+                  data={this.props.filteredProducts}
+                  renderItem={this._renderItem}
+                  keyExtractor={this._keyExtractor}
+                  onEndReachedThreshold={0.5}
+                  onEndReached={this._getMore}
+                  refreshControl={this._renderRefreshControl()}
+                />
+                :
+                <View style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}>
+                  <Text style={{ justifyContent: 'center', alignItems: 'center' }}>No Products found</Text>
+                </View>
+            )}
       </View>
     );
   }
@@ -119,7 +121,7 @@ function mapStateToProps(state) {
     isRefreshing: state.productState.isRefreshing,
     page: state.productState.page,
     limit: state.productState.limit,
-    filteredProducts : state.productState.filteredProducts
+    filteredProducts: state.productState.filteredProducts
   };
 }
 
@@ -130,5 +132,5 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-    SearchProduct
+  SearchProduct
 );

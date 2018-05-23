@@ -27,14 +27,14 @@ class ProductAdmin extends Component {
   onDeleteTapped = id => {
 
     Alert.alert(
-        'Delete Item',
-        'Are you sure you want to delete the item?',
-        [
-          {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-          {text: 'OK', onPress: () => this._deleteItem(id)},
-        ],
-        { cancelable: false }
-      )
+      'Delete Item',
+      'Are you sure you want to delete the item?',
+      [
+        { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+        { text: 'OK', onPress: () => this._deleteItem(id) },
+      ],
+      { cancelable: false }
+    )
 
 
   };
@@ -46,13 +46,13 @@ class ProductAdmin extends Component {
 
   _deleteItem = (id) => {
     fetch(`${URI}/products/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'content-type': 'application/json'
-        },
-      }).then(response => this.props.actions.deleteProduct(id))
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      },
+    }).then(response => this.props.actions.deleteProduct(id))
       .then(Vibration.vibrate(1000)//After item is deleted, vibrate the device for 1 sec.
-    )
+      )
   }
   /*  flat list supporting methods */
 
@@ -81,7 +81,6 @@ class ProductAdmin extends Component {
   };
 
   _onRefresh = () => {
-    //this.setState({ isRefreshing: true });
     this._getProducts();
   };
 
@@ -101,19 +100,19 @@ class ProductAdmin extends Component {
 
   render() {
     return (
-      <View style={{flex:1,backgroundColor:'#fff'}}>
+      <View style={{ flex: 1, backgroundColor: '#fff' }}>
         {this.props.isLoading ? (
           <ActivityIndicator size="large" color="#00ff80" />
         ) : (
-          <FlatList
-            data={this.props.products}
-            renderItem={this._renderItem}
-            keyExtractor={this._keyExtractor}
-            onEndReachedThreshold={0.5}
-            onEndReached={this._getMore}
-            refreshControl={this._renderRefreshControl()}
-          />
-        )}
+            <FlatList
+              data={this.props.products}
+              renderItem={this._renderItem}
+              keyExtractor={this._keyExtractor}
+              onEndReachedThreshold={0.5}
+              onEndReached={this._getMore}
+              refreshControl={this._renderRefreshControl()}
+            />
+          )}
       </View>
     );
   }
@@ -136,5 +135,5 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-    ProductAdmin
+  ProductAdmin
 );
