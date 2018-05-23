@@ -49,6 +49,7 @@ export default (prevState = {
                 product: action.product
             }
         case ADD_PRODUCT_SUCCESS:
+            console.log('add Product - ', action.product);
             return { ...prevState,
                 isLoading: false,
                 product: action.product

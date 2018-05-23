@@ -11,7 +11,7 @@ import {
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as productActionCreators from "../actionCreators/product";
-let URI = "http://172.16.102.72:4000";
+let URI = "http://192.168.1.34:4000";
 class ProductListWithFlatList extends Component {
   constructor(props) {
     super(props);
@@ -22,12 +22,7 @@ class ProductListWithFlatList extends Component {
   }
 
   onWishTapped = id => {
-    // TODO: when user taps on the heart icon, you 
-    // need to change the icon to full heart, which is 
-    // already handled in ProductListItem based on wish property
-    // you need to set the wish property to true for the tapped product
-    // which is already in the state
-    // implement above using react redux
+
   };
 
   _getProducts = (page = 1, limit = 8) => {

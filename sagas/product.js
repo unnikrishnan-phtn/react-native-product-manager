@@ -7,7 +7,7 @@ import {
     GET_PRODUCTS, ADD_PRODUCT, GET_PRODUCT
 } from "../actionTypes/product";
 
-let URI = "http://172.16.102.72:4000";
+let URI = "http://192.168.1.34:4000";
 
 function* getProducts(action) {
     try {
@@ -30,22 +30,25 @@ function* getProduct(action) {
     }
 }
 
-// function* addProduct(action) {
-//     try {
-//         let product = yield fetch(`${URI}\products`, {
-//             body: JSON.stringify(action.product),
-//             method: 'POST',
-//             headers: {
-//                 'content-type': 'application/json'
-//             },
-//         }).then(r => r.json());
-//         yield put(actionCreators.addProductSuccess(product))
-//     } catch (error) {
-//         yield put(actionCreators.addProductFailure(error))
-//     }
-// }
+function* addProduct(action) {
+    try {
+
+        let product = yield fetch(`${URI}/products`, {
+            body: JSON.stringify(action.product),
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+        }).then(r => r.json());
+        yield put(actionCreators.addProductSuccess(product))
+    } catch (error) {
+        yield put(actionCreators.addProductFailure(error))
+    }
+}
 
 export function* productWatchers() {
     yield takeLatest(GET_PRODUCTS, getProducts)
     yield takeLatest(GET_PRODUCT, getProduct)
+    yield takeLatest(ADD_PRODUCT, addProduct)
+
 }

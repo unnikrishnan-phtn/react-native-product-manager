@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Button, TextInput, Picker,Alert,Text,Platform } from 'react-native';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as productActionCreators from "../actionCreators/product";
 
 let URI = "http://172.16.102.72:4000";
 
-export default class AddProduct extends Component {
+class AddProduct extends Component {
   static navigationOptions= {
     title: "Add",
     headerStyle: {
@@ -38,19 +41,28 @@ export default class AddProduct extends Component {
       this.setState({titleError:'Title is required'})
       return;
     }
-    fetch(`${URI}/products`, {
-      body: JSON.stringify({
-        title,
-        category,
-        additionalInfo,
-        price
-      }),
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-    }).then(p => {Alert.alert('Success','Product Saved Successfully')})
+
+    let addedProduct = {
+      title : title,
+      price : price,
+      category : category,
+      additionalInfo : additionalInfo
+    }
+    this.props.actions.addProduct(addedProduct);
   }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(this.props.product);
+    console.log(this.props.product);
+
+    if(this.props.product.additionalInfo !== nextProps.product.additionalInfo ||
+      this.props.product.category !== nextProps.product.category ||
+      this.props.product.price !== nextProps.product.price ||
+      this.props.product.title !== nextProps.product.title
+    ){
+        Alert.alert('Success','Product Saved Successfully')
+    }
+ }
 
   renderCategories = () => {
     return this.state.categories.map(c => <Picker.Item key={c} label={c} value={c} />)
@@ -130,3 +142,20 @@ const styles = StyleSheet.create({
     })
   }
 });
+
+
+function mapStateToProps(state) {
+  return {
+    product : state.productState.product
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(productActionCreators, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  AddProduct
+);

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as productActionCreators from "../actionCreators/product";
 
-let URI = "http://172.16.102.72:4000";
+let URI = "http://192.168.1.34:4000";
 
 
 class ProductDetail extends React.Component {
