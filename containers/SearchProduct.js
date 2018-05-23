@@ -26,15 +26,6 @@ class SearchProduct extends Component {
     this.props.actions.getProducts(this.props.page, this.props.limit);
   }
 
-  
-  onWishTapped = id => {
-    // TODO: when user taps on the heart icon, you 
-    // need to change the icon to full heart, which is 
-    // already handled in ProductListItem based on wish property
-    // you need to set the wish property to true for the tapped product
-    // which is already in the state
-    // implement above using react redux
-  };
 
   _getProducts = (page = 1, limit = 8) => {
     this.props.actions.getProducts(page, limit);
@@ -57,7 +48,6 @@ class SearchProduct extends Component {
         price={item.price}
         wish={false}
         showWish={false}
-        onWishTapped={this.onWishTapped}
       />
     );
   };
@@ -67,7 +57,6 @@ class SearchProduct extends Component {
   };
 
   _onRefresh = () => {
-    //this.setState({ isRefreshing: true });
     this._getProducts();
   };
 

@@ -20,9 +20,8 @@ function* getProducts(action) {
 
 function* getProduct(action) {
     try {
-        console.log(`${URI}/products/${action.id}`);
         let product = yield fetch(`${URI}/products/${action.id}`).then(r => r.json());
-    
+
         yield put(actionCreators.getProductSuccess(product))
     } catch (error) {
         console.log(error)

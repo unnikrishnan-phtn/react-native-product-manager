@@ -23,6 +23,7 @@ class ProductAdmin extends Component {
     this.props.actions.getProducts(this.props.page, this.props.limit);
   }
 
+  // Show alert message and on confirmation delete the item.
   onDeleteTapped = id => {
 
     Alert.alert(
@@ -50,7 +51,7 @@ class ProductAdmin extends Component {
           'content-type': 'application/json'
         },
       }).then(response => this.props.actions.deleteProduct(id))
-      .then(Vibration.vibrate(1000)
+      .then(Vibration.vibrate(1000)//After item is deleted, vibrate the device for 1 sec.
     )
   }
   /*  flat list supporting methods */

@@ -20,7 +20,7 @@ class ProductDetail extends React.Component {
   componentDidMount() {
     this.setState({ isLoading: true });
     let { id } = this.props.navigation.state.params;
-      this.props.actions.getProduct(id);
+    this.props.actions.getProduct(id);
   }
 
   renderProduct() {
