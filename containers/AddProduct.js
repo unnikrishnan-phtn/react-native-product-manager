@@ -52,8 +52,6 @@ class AddProduct extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(this.props.product);
-    console.log(this.props.product);
 
     if(this.props.product.additionalInfo !== nextProps.product.additionalInfo ||
       this.props.product.category !== nextProps.product.category ||
